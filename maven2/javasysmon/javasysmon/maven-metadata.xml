@@ -4,11 +4,12 @@
   <artifactId>javasysmon</artifactId>
   <version>0.3.3</version>
   <versioning>
-    <latest>0.3.3</latest>
-    <release>0.3.3</release>
+    <latest>0.3.4</latest>
+    <release>0.3.4</release>
     <versions>
       <version>0.3.3</version>
+      <version>0.3.4</version>
     </versions>
-    <lastUpdated>20121118003033</lastUpdated>
+    <lastUpdated>20130713115624</lastUpdated>
   </versioning>
 </metadata>
