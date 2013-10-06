@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>it.sauronsoftware.ftp4j</groupId>
+  <groupId>it.sauronsoftware</groupId>
   <artifactId>ftp4j</artifactId>
   <version>1.7.2</version>
   <versioning>
@@ -9,6 +9,6 @@
     <versions>
       <version>1.7.2</version>
     </versions>
-    <lastUpdated>20131006153546</lastUpdated>
+    <lastUpdated>20131006154301</lastUpdated>
   </versioning>
 </metadata>
