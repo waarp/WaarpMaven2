@@ -588,7 +588,7 @@ It has no influence on the Maven build itself. -->
       		<rulesets>
       			<ruleset>rulesets/java/basic.xml</ruleset>
       			<ruleset>rulesets/java/design.xml</ruleset>
-      			<ruleset>rulesets/java/optimization.xml</ruleset>
+      			<ruleset>rulesets/java/optimizations.xml</ruleset>
       		</rulesets>
       		<format>xml</format>
       		<linkXref>true</linkXref>
