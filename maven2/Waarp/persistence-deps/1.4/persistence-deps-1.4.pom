@@ -83,14 +83,14 @@
     	<name>ANASOFT OpenSource releases</name>
     	<url>http://anasoft-os-repo.googlecode.com/svn/repository/releases</url>
     </repository>
-    <repository>
+<!--     <repository>
   		<id>SNMP4J repository</id>
   		<name>SNMP4J repository</name>
   		<url>https://server.oosnmp.net/dist/release</url>
   		<snapshots>
   			<enabled>false</enabled>
   		</snapshots>
-  	</repository>
+  	</repository>  -->
   	<repository>
 	   <id>maven2</id>
    		<url>http://repo1.maven.org/maven2</url>
