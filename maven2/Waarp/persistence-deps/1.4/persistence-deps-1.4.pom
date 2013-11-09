@@ -131,6 +131,7 @@ It has no influence on the Maven build itself. -->
                 </pluginExecution>
                 
                 <!-- New -->
+                <!-- 
                 <pluginExecution>
                   <pluginExecutionFilter>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -146,6 +147,7 @@ It has no influence on the Maven build itself. -->
                     </execute>
                   </action>
                 </pluginExecution>
+                 -->
                 <pluginExecution>
                   <pluginExecutionFilter>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -366,7 +368,7 @@ It has no influence on the Maven build itself. -->
         </executions>
       </plugin>
 
-      <plugin>
+      <!-- <plugin>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>2.10</version>
         <executions>
@@ -385,7 +387,7 @@ It has no influence on the Maven build itself. -->
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
