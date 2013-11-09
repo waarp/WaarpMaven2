@@ -500,7 +500,7 @@ It has no influence on the Maven build itself. -->
         </configuration>
       </plugin>
 
-	  <plugin>
+	  <!-- <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
@@ -516,7 +516,7 @@ It has no influence on the Maven build itself. -->
             <delete dir="${project.build.directory}/classes" quiet="true" />
           </target>
         </configuration>
-      </plugin>
+      </plugin>  -->
             
 	</plugins>
   </build>
