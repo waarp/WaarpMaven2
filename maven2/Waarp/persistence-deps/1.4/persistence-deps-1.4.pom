@@ -586,8 +586,9 @@ It has no influence on the Maven build itself. -->
       	<configuration>
       		<targetJdk>1.6</targetJdk>
       		<rulesets>
-      			<ruleset>/rulesets/basic.xml</ruleset>
-      			<ruleset>/rulesets/design.xml</ruleset>
+      			<ruleset>rulesets/java/basic.xml</ruleset>
+      			<ruleset>rulesets/java/design.xml</ruleset>
+      			<ruleset>rulesets/java/optimization.xml</ruleset>
       		</rulesets>
       		<format>xml</format>
       		<linkXref>true</linkXref>
