@@ -242,12 +242,12 @@ It has no influence on the Maven build itself. -->
 	            <dependency>
 	            <groupId>org.apache.maven.doxia</groupId>
 	            <artifactId>doxia-sink-api</artifactId>
-	            <version>1.3</version>
+	            <version>1.4</version>
 	          </dependency>
 	           <dependency>
 	            <groupId>org.apache.maven.doxia</groupId>
 	            <artifactId>doxia-core</artifactId>
-	            <version>1.3</version>
+	            <version>1.4</version>
 	          </dependency>
 	        </dependencies>
       </plugin>
@@ -458,17 +458,6 @@ It has no influence on the Maven build itself. -->
         </dependencies>
       </plugin>
       
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <detectOfflineLinks>false</detectOfflineLinks>
-          <breakiterator>true</breakiterator>
-          <version>false</version>
-          <author>true</author>
-          <keywords>true</keywords>
-        </configuration>
-      </plugin>
-
 	</plugins>
   </build>
   <profiles>
