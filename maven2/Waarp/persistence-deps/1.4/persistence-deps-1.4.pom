@@ -232,6 +232,24 @@ It has no influence on the Maven build itself. -->
 	        	<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 	           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 		    </configuration>
+		    <dependencies>
+	  <!-- For SyntaxHighlighter macro: http://code.google.com/p/m2-site-tools/ -->
+	          <dependency>
+	            <groupId>com.anasoft.os</groupId>
+	            <artifactId>m2st-doxia-macros</artifactId>
+	            <version>2.0</version>
+	          </dependency>
+	            <dependency>
+	            <groupId>org.apache.maven.doxia</groupId>
+	            <artifactId>doxia-sink-api</artifactId>
+	            <version>1.4</version>
+	          </dependency>
+	           <dependency>
+	            <groupId>org.apache.maven.doxia</groupId>
+	            <artifactId>doxia-core</artifactId>
+	            <version>1.4</version>
+	          </dependency>
+	        </dependencies>
       </plugin>
 	  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -514,6 +532,7 @@ It has no influence on the Maven build itself. -->
               <report>project-team</report>
               <report>issue-tracking</report>
               <report>license</report>
+              <report>help</report>
               <report>scm</report>
             </reports>
           </reportSet>
