@@ -2,7 +2,7 @@
 <metadata>
   <groupId>Waarp</groupId>
   <artifactId>WaarpCommon</artifactId>
-  <version>1.2.3</version>
+  <version>1.2.13</version>
   <versioning>
     <latest>1.2.22</latest>
     <release>1.2.22</release>
@@ -31,6 +31,6 @@
       <version>1.2.21</version>
       <version>1.2.22</version>
     </versions>
-    <lastUpdated>20140228214556</lastUpdated>
+    <lastUpdated>20140301224746</lastUpdated>
   </versioning>
 </metadata>
