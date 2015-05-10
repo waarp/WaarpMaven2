@@ -2,7 +2,7 @@
 <metadata>
   <groupId>javasysmon</groupId>
   <artifactId>javasysmon</artifactId>
-  <version>0.3.4</version>
+  <version>0.3.5</version>
   <versioning>
     <latest>0.3.6</latest>
     <release>0.3.6</release>
@@ -13,6 +13,6 @@
       <version>0.3.5-atlassian</version>
       <version>0.3.6</version>
     </versions>
-    <lastUpdated>20150510104803</lastUpdated>
+    <lastUpdated>20150510112759</lastUpdated>
   </versioning>
 </metadata>
