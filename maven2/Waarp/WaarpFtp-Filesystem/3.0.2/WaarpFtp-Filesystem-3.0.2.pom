@@ -1,0 +1,54 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+	  <groupId>Waarp</groupId>
+	  <artifactId>WaarpFtp</artifactId>
+	  <version>3.0.2</version>
+	  <relativePath>../pom.xml</relativePath>
+  </parent>
+  <name>WaarpFtp-Filesystem</name>
+  <artifactId>WaarpFtp-Filesystem</artifactId>
+  <properties>
+    <filtermodule>ftp/filesystembased</filtermodule>
+    <filterexclude>zzz</filterexclude>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>Waarp</groupId>
+      <artifactId>WaarpFtp-Core</artifactId>
+      <version>${version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+  	<sourceDirectory>../src/main/java</sourceDirectory>
+
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	          <encoding>UTF-8</encoding>
+	          <source>1.6</source>
+	          <target>1.6</target>
+	          <optimize>true</optimize>
+	          <showDeprecations>true</showDeprecations>
+	          <includes>
+	          	<include>**/${filtermodule}/**</include>
+	          </includes>
+	        </configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+  <reporting>
+  	<plugins>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-site-plugin</artifactId>
+      	<version>3.3</version>
+      	<configuration>
+      		<generateReports>false</generateReports>
+      	</configuration>
+      </plugin>
+  	</plugins>
+  </reporting>
+</project>
