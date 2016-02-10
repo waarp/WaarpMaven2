@@ -2,7 +2,7 @@
 <metadata>
   <groupId>Waarp</groupId>
   <artifactId>WaarpFtpClient</artifactId>
-  <version>3.0.1</version>
+  <version>1.0.3</version>
   <versioning>
     <latest>3.0.1</latest>
     <release>3.0.1</release>
@@ -15,6 +15,6 @@
       <version>3.0.0</version>
       <version>3.0.1</version>
     </versions>
-    <lastUpdated>20150712133656</lastUpdated>
+    <lastUpdated>20160210232058</lastUpdated>
   </versioning>
 </metadata>
