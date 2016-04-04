@@ -41,11 +41,11 @@
 		</repository>
 	</repositories>
 	<dependencies>
-        <dependency>
-            <groupId>Waarp</groupId>
-            <artifactId>WaarpCommon</artifactId>
-            <version>3.0.6</version>
-        </dependency>
+		<dependency>
+			<groupId>Waarp</groupId>
+			<artifactId>WaarpCommon</artifactId>
+			<version>3.0.6</version>
+		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -88,6 +88,27 @@
 	</properties>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>animal-sniffer-maven-plugin</artifactId>
+				<configuration>
+				  <signature>
+					<groupId>org.codehaus.mojo.signature</groupId>
+					<artifactId>java17</artifactId>
+					<version>1.0</version>
+				  </signature>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				  <configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.7</source>
+					<target>1.7</target>
+					<optimize>true</optimize>
+					<showDeprecations>true</showDeprecations>
+				  </configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -187,40 +208,40 @@
 	</build>
 	<reporting>
 		<plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <configuration>
-          <xmlOutput>true</xmlOutput>
-          <xmlOutputDirectory>target/site</xmlOutputDirectory>
-          <failOnError>false</failOnError>
-          <effort>Default</effort>
-        </configuration>
-      </plugin>
-      <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-pmd-plugin</artifactId>
-      	<version>3.0.1</version>
-      	<configuration>
-      		<targetJdk>1.6</targetJdk>
-      		<rulesets>
-      			<ruleset>rulesets/java/basic.xml</ruleset>
-      			<!-- <ruleset>rulesets/java/design.xml</ruleset>
-      			<ruleset>rulesets/java/optimizations.xml</ruleset> -->
-      		</rulesets>
-      		<format>xml</format>
-      		<linkXref>true</linkXref>
-      		<sourceEncoding>utf-8</sourceEncoding>
-      		<minimumTokens>100</minimumTokens>
-      		<failOnViolation>false</failOnViolation>
-      		<aggregate>true</aggregate>
-      	</configuration>
-      </plugin>
-      
 	  <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>findbugs-maven-plugin</artifactId>
+		<configuration>
+		  <xmlOutput>true</xmlOutput>
+		  <xmlOutputDirectory>target/site</xmlOutputDirectory>
+		  <failOnError>false</failOnError>
+		  <effort>Default</effort>
+		</configuration>
+	  </plugin>
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-pmd-plugin</artifactId>
+		<version>3.0.1</version>
+		<configuration>
+			<targetJdk>1.7</targetJdk>
+			<rulesets>
+				<ruleset>rulesets/java/basic.xml</ruleset>
+				<!-- <ruleset>rulesets/java/design.xml</ruleset>
+				<ruleset>rulesets/java/optimizations.xml</ruleset> -->
+			</rulesets>
+			<format>xml</format>
+			<linkXref>true</linkXref>
+			<sourceEncoding>utf-8</sourceEncoding>
+			<minimumTokens>100</minimumTokens>
+			<failOnViolation>false</failOnViolation>
+			<aggregate>true</aggregate>
+		</configuration>
+	  </plugin>
+
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-javadoc-plugin</artifactId>
+		<version>2.9.1</version>
 				<reportSets>
 					<reportSet>
 						<id>aggregate</id>
@@ -247,11 +268,11 @@
 							<doctitle>${project.name} ${project.version} API Reference</doctitle>
 							<windowtitle>${project.name} ${project.version} API Reference</windowtitle>
 							<additionalparam>
-	            -link http://java.sun.com/javase/6/docs/api/
+				-link http://java.sun.com/javase/6/docs/api/
 
 				-group "Waarp FTP Client for R66 package" "org.waarp.ftp.client*"
 
-	            -sourceclasspath ${basedir}/target/classes
+				-sourceclasspath ${basedir}/target/classes
 							</additionalparam>
 							<encoding>UTF-8</encoding>
 							<locale>en_US</locale>
