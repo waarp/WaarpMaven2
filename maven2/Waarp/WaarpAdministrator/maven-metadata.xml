@@ -2,7 +2,7 @@
 <metadata>
   <groupId>Waarp</groupId>
   <artifactId>WaarpAdministrator</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.8</version>
   <versioning>
     <latest>3.0.1</latest>
     <release>3.0.1</release>
@@ -20,6 +20,6 @@
       <version>3.0.0</version>
       <version>3.0.1</version>
     </versions>
-    <lastUpdated>20160404214231</lastUpdated>
+    <lastUpdated>20160519011030</lastUpdated>
   </versioning>
 </metadata>
