@@ -1,0 +1,322 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>WaarpFtp</artifactId>
+  <name>WaarpFtp</name>
+  <version>3.0.8</version>
+  <packaging>pom</packaging>
+  <description>
+	  The Waarp FTP project is a proposal of a new fresh FTP server implementation,
+	  fully in Java according to the following RFC: RFC 959, RFC 775, RFC 2389, RFC 2428, RFC 3659.
+	  It includes also extra commands like XCRC, XMD5, XSHA1, INTERNALSHUTDOWN. It is based mainly
+	  on the NETTY framework (NIO great framework support) and is tend to be really efficient, both
+	  in term of memory, threads and network bandwidth. Bandwidth limitation can be configured both
+	  in store and retrieve, per session (although only one value is set by default, but it can be
+	  changed dynamically if needed) or globally to the server and of course with no limitation at
+	  all if wanted. Limitation should be enough to change the bandwidth behaviour for instance
+	  depending on the time in the day, so as to allow to limit bandwidth usage when users are at
+	  work and in contrary to allow more speed when only batchs are running. The specificity of this
+	  project is you can adapt this software to your particular needs by: changing the pre or post
+	  action on commands (not ony transfer), changing the underlying representation of files and
+	  directories (for instance with database entries), using any particular authentication mechanism.
+  </description>
+  <url>http://waarp.github.com/WaarpFtp</url>
+  <inceptionYear>2009</inceptionYear>
+  <parent>
+    <groupId>Waarp</groupId>
+    <artifactId>persistence-deps</artifactId>
+    <version>1.5</version>
+  </parent>
+  <issueManagement>
+	<system>GitHub</system>
+  	<url>https://github.com/waarp/WaarpFtp/issues/</url>
+  </issueManagement>
+  <scm>
+  	<connection>scm:git:git://github.com/waarp/WaarpFtp.git</connection>
+  	<developerConnection>scm:git:git@github.com:YourID/WaarpFtp.git</developerConnection>
+  	<url>https://github.com/waarp/WaarpFtp</url>
+  </scm>
+  <licenses>
+  	<license>
+  		<name>GPL 3.0</name>
+  		<url>LICENSE.txt</url>
+  	</license>
+  </licenses>
+  <repositories>
+  	<repository>
+  		<id>waarp.releases</id>
+  		<name>Waarp releases</name>
+  		<url>https://raw.github.com/waarp/WaarpMaven2/master/maven2</url>
+  		<releases>
+  			<enabled>true</enabled>
+  		</releases>
+  		<snapshots>
+  			<enabled>false</enabled>
+  		</snapshots>
+  	</repository>
+  </repositories>
+
+  <modules>
+  	<module>core</module>
+  	<module>filesystem</module>
+  	<module>simpleimpl</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>Waarp</groupId>
+      <artifactId>WaarpCommon</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.2.3</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<attach-distribution>false</attach-distribution>
+    <filtermodule>**</filtermodule>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>1.16</version>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java16</artifactId>
+            <version>1.0</version>
+          </signature>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <encoding>UTF-8</encoding>
+            <source>1.6</source>
+            <target>1.6</target>
+            <optimize>true</optimize>
+            <showDeprecations>true</showDeprecations>
+          </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>write-version</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+	    	</goals>
+            <configuration>
+              <tasks>
+                <mkdir dir="${project.build.directory}" />
+                <echo message="${project.version}" file="${project.build.directory}/version.txt" />
+                <mkdir dir="${project.build.directory}/classes"/>
+                <echo message="${project.artifactId}" />
+                <taskdef resource="net/sf/antcontrib/antlib.xml" />
+                <if>
+                <equals arg1="${project.artifactId}" arg2="WaarpFtp"/>
+                <then>
+                	<mkdir dir="${project.build.directory}/site"/>
+                	<mkdir dir="${project.build.directory}/site/core"/>
+                	<mkdir dir="${project.build.directory}/site/filesystem"/>
+                	<mkdir dir="${project.build.directory}/site/simpleimpl"/>
+                	<copy file="${basedir}/src/site/resources/html/core/index.html" toDir="${project.build.directory}/site/core/"/>
+                	<copy file="${basedir}/src/site/resources/html/filesystem/index.html" toDir="${project.build.directory}/site/filesystem/"/>
+                	<copy file="${basedir}/src/site/resources/html/simpleimpl/index.html" toDir="${project.build.directory}/site/simpleimpl/"/>
+                </then>
+                </if>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-license</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <taskdef resource="net/sf/antcontrib/antlib.xml" />
+                <if>
+                  <or>
+                    <equals arg2="jar" arg1="${project.packaging}" />
+                    <equals arg2="bundle" arg1="${project.packaging}" />
+                  </or>
+                  <then>
+                    <move file="${project.build.directory}/${project.build.finalName}.jar" tofile="${project.build.directory}/${project.build.finalName}.orig.jar" />
+                    <zip destfile="${project.build.directory}/${project.build.finalName}.jar" duplicate="preserve">
+                      <zipfileset dir="${basedir}" prefix="META-INF/">
+                        <include name="LICENSE.*" />
+                        <include name="NOTICE.*" />
+                        <include name="COPYRIGHT.*" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
+                        <exclude name="**/.*/**" />
+                        <include name="**" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/../src/main/config/" prefix="META-INF/config/">
+                        <exclude name="**/.*/**" />
+                        <include name="**" />
+                      </zipfileset>
+                      <zipfileset filemode="644" src="${project.build.directory}/${project.build.finalName}.orig.jar" dirmode="755">
+                      </zipfileset>
+                    </zip>
+                    <delete file="${project.build.directory}/${project.build.finalName}.orig.jar" />
+                    <move file="${project.build.directory}/${project.build.finalName}-sources.jar" tofile="${project.build.directory}/${project.build.finalName}-sources.orig.jar" />
+                    <zip destfile="${project.build.directory}/${project.build.finalName}-sources.jar" duplicate="preserve">
+                      <zipfileset dir="${basedir}" prefix="META-INF/">
+                        <include name="LICENSE.*" />
+                        <include name="NOTICE.*" />
+                        <include name="COPYRIGHT.*" />
+                        <include name="**/Makefile" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
+                        <exclude name="**/.*/**" />
+                        <include name="**" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/../src/main/config/" prefix="META-INF/config/">
+                        <exclude name="**/.*/**" />
+                        <include name="**" />
+                      </zipfileset>
+                      <zipfileset filemode="644" src="${project.build.directory}/${project.build.finalName}-sources.orig.jar" dirmode="755">
+                      	<exclude name="**/${filterexclude}/**" />
+                        <include name="**/${filtermodule}/**" />
+                      </zipfileset>
+                    </zip>
+                    <delete file="${project.build.directory}/${project.build.finalName}-sources.orig.jar" />
+                  </then>
+                </if>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.3</version>
+        <inherited>false</inherited>
+        <configuration>
+          <rulesUri>file:///${session.executionRootDirectory}/maven-version-rules.xml</rulesUri>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+  	<plugins>
+
+  	<plugin>
+      <!-- Do NOT upgrade -->
+      	<groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <!--aggregate>true</aggregate-->
+          <inputEncoding>UTF-8</inputEncoding>
+          <outputEncoding>UTF-8</outputEncoding>
+          <linkJavadoc>true</linkJavadoc>
+          <destDir>${project.build.directory}/xref</destDir>
+          <javadocDir>${project.build.directory}/site/api</javadocDir>
+          <aggregate>true</aggregate>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+          <failOnError>false</failOnError>
+          <effort>Default</effort>
+          <aggregate>true</aggregate>
+        </configuration>
+      </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-pmd-plugin</artifactId>
+      	<version>3.0.1</version>
+      	<configuration>
+      		<targetJdk>1.6</targetJdk>
+      		<rulesets>
+      			<ruleset>rulesets/java/basic.xml</ruleset>
+      			<!-- <ruleset>rulesets/java/design.xml</ruleset>
+      			<ruleset>rulesets/java/optimizations.xml</ruleset> -->
+      		</rulesets>
+      		<format>xml</format>
+      		<linkXref>true</linkXref>
+      		<sourceEncoding>utf-8</sourceEncoding>
+      		<minimumTokens>100</minimumTokens>
+      		<failOnViolation>false</failOnViolation>
+      		<aggregate>true</aggregate>
+      	</configuration>
+      </plugin>
+
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+
+        <reportSets>
+         <reportSet>
+          <id>aggregate</id>
+          <configuration>
+	          <aggregate>true</aggregate>
+	          <doclet>org.jboss.apiviz.APIviz</doclet>
+	          <docletArtifact>
+	            <groupId>org.jboss.apiviz</groupId>
+	            <artifactId>apiviz</artifactId>
+	            <version>1.3.2.GA</version>
+	          </docletArtifact>
+	          <attach>false</attach>
+	          <useStandardDocletOptions>true</useStandardDocletOptions>
+	          <outputDirectory>${project.build.directory}/api</outputDirectory>
+	          <reportOutputDirectory>${project.build.directory}/api</reportOutputDirectory>
+	          <destDir>api</destDir>
+	          <charset>UTF-8</charset>
+	          <docencoding>UTF-8</docencoding>
+	          <breakiterator>true</breakiterator>
+	          <version>true</version>
+	          <author>true</author>
+	          <keywords>true</keywords>
+	          <overview>${basedir}/src/javadoc/overview.html</overview>
+	          <doctitle>${project.name} ${project.version} API Reference</doctitle>
+	          <windowtitle>${project.name} ${project.version} API Reference</windowtitle>
+	          <additionalparam>
+	            -link http://java.sun.com/javase/6/docs/api/
+
+				-group "Waarp FTP Main Core package" "org.waarp.ftp.core*"
+				-group "Waarp FTP Filesystem Implementation package" "org.waarp.ftp.filesystembased*"
+				-group "Waarp Simple FTP Server package" "org.waarp.ftp.simpleimpl*"
+
+                -group "Extra Netty patch package" "io.netty*"
+
+	            -sourceclasspath ${basedir}/core/target/classes
+	            -sourceclasspath ${basedir}/filesystem/target/classes
+	            -sourceclasspath ${basedir}/simpleimpl/target/classes
+	          </additionalparam>
+	          <encoding>UTF-8</encoding>
+	          <locale>en_US</locale>
+	          <excludePackageNames>${project.groupId}.test*:${project.groupId}.example*:${project.groupId}.util.internal*</excludePackageNames>
+          </configuration>
+          <reports>
+           <report>aggregate</report>
+          </reports>
+         </reportSet>
+        </reportSets>
+      </plugin>
+	</plugins>
+  </reporting>
+</project>

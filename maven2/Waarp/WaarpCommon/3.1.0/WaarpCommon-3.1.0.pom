@@ -1,0 +1,506 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>WaarpCommon</artifactId>
+  <packaging>jar</packaging>
+  <version>3.1.0</version>
+  <name>Waarp Common</name>
+  <description>
+	  The Waarp Common project contains several classes that are common with different
+	  sub projects of Waarp (FTP, R66, ...). Mainly there are classes for virtual
+	  Directory and File implementations, Logger interfaces, Common exceptions...
+  </description>
+  <url>http://waarp.github.com/WaarpCommon</url>
+  <inceptionYear>2009</inceptionYear>
+  <parent>
+    <groupId>Waarp</groupId>
+    <artifactId>persistence-deps</artifactId>
+    <version>1.5</version>
+  </parent>
+  <issueManagement>
+	<system>GitHub</system>
+  	<url>https://github.com/waarp/WaarpCommon/issues/</url>
+  </issueManagement>
+  <scm>
+  	<connection>scm:git:git://github.com/waarp/WaarpCommon.git</connection>
+  	<developerConnection>scm:git:git@github.com:YourID/WaarpCommon.git</developerConnection>
+  	<url>https://github.com/waarp/WaarpCommon</url>
+  </scm>
+  <licenses>
+  	<license>
+  		<name>GPL 3.0</name>
+  		<url>LICENSE.txt</url>
+  	</license>
+  </licenses>
+  <repositories>
+  	<repository>
+  		<id>waarp.releases</id>
+  		<name>Waarp releases</name>
+  		<url>https://raw.github.com/waarp/WaarpMaven2/master/maven2</url>
+  		<releases>
+  			<enabled>true</enabled>
+  		</releases>
+  		<snapshots>
+  			<enabled>false</enabled>
+  		</snapshots>
+  	</repository>
+	<repository>
+			<id>eaio.com</id>
+			<name>EAIO</name>
+			<url>http://eaio.com/maven2</url>
+  		<releases>
+  			<enabled>true</enabled>
+  		</releases>
+  		<snapshots>
+  			<enabled>false</enabled>
+  		</snapshots>
+	</repository>
+  </repositories>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <attach-distribution>false</attach-distribution>
+    <filtermodule>**</filtermodule>
+
+    <rs-api.version>2.1.1</rs-api.version>
+    <netty.version>4.1.37.Final</netty.version>
+    <slf4j.version>1.7.26</slf4j.version>
+    <findbugs.version>2.0.1</findbugs.version>
+    <beanutils.version>1.8.3</beanutils.version>
+    <junit.version>4.12</junit.version>
+    <logback.version>1.2.3</logback.version>
+    <gson.version>2.8.5</gson.version>
+  </properties>
+
+  <dependencies>
+    <!-- JDBC dependencies -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>2.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.199</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>1.7.4</version>
+      <optional>true</optional>
+      <exclusions>
+        <exclusion>
+          <artifactId>jna</artifactId>
+          <groupId>net.java.dev.jna</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.47</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>Oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>6</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.6.jre6</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Logging dependencies -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <!-- Netty dependencies -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-buffer</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec-http</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-handler</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+    <!-- Waarp dependencies -->
+    <dependency>
+      <groupId>Waarp</groupId>
+      <artifactId>WaarpDigest</artifactId>
+      <version>3.0.6</version>
+    </dependency>
+
+    <dependency>
+    	<groupId>commons-io</groupId>
+    	<artifactId>commons-io</artifactId>
+    	<version>2.6</version>
+    </dependency>
+
+    <!-- Others dependencies -->
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>${findbugs.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils-core</artifactId>
+      <version>${beanutils.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>jaxen</groupId>
+    	<artifactId>jaxen</artifactId>
+    	<version>1.2.0</version>
+    	<exclusions>
+    		<exclusion>
+    			<artifactId>xom</artifactId>
+    			<groupId>xom</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>jdom</artifactId>
+    			<groupId>jdom</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>xercesImpl</artifactId>
+    			<groupId>xerces</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>xml-apis</artifactId>
+    			<groupId>xml-apis</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>findbugs</artifactId>
+    			<groupId>findbugs</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>commons-jelly-tags-log</artifactId>
+    			<groupId>commons-jelly</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>cobertura</artifactId>
+    			<groupId>cobertura</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>maven-findbugs-plugin</artifactId>
+    			<groupId>maven-plugins</groupId>
+    		</exclusion>
+    		<exclusion>
+    			<artifactId>maven-cobertura-plugin</artifactId>
+    			<groupId>maven-plugins</groupId>
+    		</exclusion>
+    	</exclusions>
+    </dependency>
+    <dependency>
+    	<groupId>javasysmon</groupId>
+    	<artifactId>javasysmon</artifactId>
+    	<version>0.3.6</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>${rs-api.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-compress</artifactId>
+    	<version>1.18</version>
+    </dependency>
+    <dependency>
+    	<groupId>commons-daemon</groupId>
+    	<artifactId>commons-daemon</artifactId>
+    	<version>1.2.0</version>
+    	<optional>true</optional>
+    </dependency>
+    <dependency>
+    	<groupId>dom4j</groupId>
+    	<artifactId>dom4j</artifactId>
+    	<version>1.6.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-databind</artifactId>
+    	<version>2.9.9</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.9.9</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-smile-provider</artifactId>
+      <version>2.9.9</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.25.0-GA</version>
+    </dependency>
+
+    <!-- Testing dependencies -->
+    <dependency>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>4.12</version>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>io.cdap.http</groupId>
+    	<artifactId>netty-http</artifactId>
+    	<version>1.2.0</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>1.16</version>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java16</artifactId>
+            <version>1.0</version>
+          </signature>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <encoding>UTF-8</encoding>
+            <source>1.6</source>
+            <target>1.6</target>
+            <optimize>true</optimize>
+            <showDeprecations>true</showDeprecations>
+          </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>write-version</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+	    	</goals>
+            <configuration>
+              <tasks>
+                <mkdir dir="${project.build.directory}"/>
+                <mkdir dir="${project.build.directory}/classes"/>
+                <echo message="${project.version}" file="${project.build.directory}/version.txt" />
+                <echo message="${project.artifactId}" />
+                <taskdef resource="net/sf/antcontrib/antlib.xml" />
+                <if>
+                <equals arg1="${project.artifactId}" arg2="WaarpCommon"/>
+                <then>
+                	<mkdir dir="${project.build.directory}/site"/>
+                </then>
+                </if>
+              </tasks>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-license</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <taskdef resource="net/sf/antcontrib/antlib.xml" />
+                <if>
+                  <or>
+                    <equals arg2="jar" arg1="${project.packaging}" />
+                    <equals arg2="bundle" arg1="${project.packaging}" />
+                  </or>
+                  <then>
+                    <move file="${project.build.directory}/${project.build.finalName}.jar" tofile="${project.build.directory}/${project.build.finalName}.orig.jar" />
+                    <zip destfile="${project.build.directory}/${project.build.finalName}.jar">
+                      <zipfileset dir="${basedir}" prefix="META-INF/">
+                        <include name="LICENSE.*" />
+                        <include name="NOTICE.*" />
+                        <include name="COPYRIGHT.*" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
+                        <exclude name="**/.*/**" />
+                        <include name="**" />
+                      </zipfileset>
+                      <zipfileset filemode="644" src="${project.build.directory}/${project.build.finalName}.orig.jar" dirmode="755">
+                      </zipfileset>
+                    </zip>
+                    <delete file="${project.build.directory}/${project.build.finalName}.orig.jar" />
+                    <move file="${project.build.directory}/${project.build.finalName}-sources.jar" tofile="${project.build.directory}/${project.build.finalName}-sources.orig.jar" />
+                    <zip destfile="${project.build.directory}/${project.build.finalName}-sources.jar">
+                      <zipfileset dir="${basedir}" prefix="META-INF/">
+                        <include name="LICENSE.*" />
+                        <include name="NOTICE.*" />
+                        <include name="COPYRIGHT.*" />
+                        <include name="**/Makefile" />
+                      </zipfileset>
+                      <zipfileset dir="${basedir}/license" prefix="META-INF/license/">
+                        <exclude name="**/.*/**" />
+                        <include name="**" />
+                      </zipfileset>
+                      <zipfileset filemode="644" src="${project.build.directory}/${project.build.finalName}-sources.orig.jar" dirmode="755">
+                      	<exclude name="**/${filterexclude}/**" />
+                        <include name="**/${filtermodule}/**" />
+                      </zipfileset>
+                    </zip>
+                    <delete file="${project.build.directory}/${project.build.finalName}-sources.orig.jar" />
+                  </then>
+                </if>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.3</version>
+        <inherited>false</inherited>
+        <configuration>
+          <rulesUri>file:///${session.executionRootDirectory}/maven-version-rules.xml</rulesUri>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+  	<plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+          <failOnError>false</failOnError>
+          <effort>Default</effort>
+        </configuration>
+      </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-pmd-plugin</artifactId>
+      	<version>3.0.1</version>
+      	<configuration>
+      		<targetJdk>1.6</targetJdk>
+      		<rulesets>
+      			<ruleset>rulesets/java/basic.xml</ruleset>
+      			<!-- <ruleset>rulesets/java/design.xml</ruleset>
+      			<ruleset>rulesets/java/optimizations.xml</ruleset> -->
+      		</rulesets>
+      		<format>xml</format>
+      		<linkXref>true</linkXref>
+      		<sourceEncoding>utf-8</sourceEncoding>
+      		<minimumTokens>100</minimumTokens>
+      		<failOnViolation>false</failOnViolation>
+      		<aggregate>true</aggregate>
+      	</configuration>
+      </plugin>
+
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <reportSets>
+         <reportSet>
+          <id>aggregate</id>
+          <configuration>
+	          <aggregate>true</aggregate>
+	          <doclet>org.jboss.apiviz.APIviz</doclet>
+	          <docletArtifact>
+	            <groupId>org.jboss.apiviz</groupId>
+	            <artifactId>apiviz</artifactId>
+	            <version>1.3.2.GA</version>
+	          </docletArtifact>
+	          <attach>false</attach>
+	          <useStandardDocletOptions>true</useStandardDocletOptions>
+	          <outputDirectory>${project.build.directory}/api</outputDirectory>
+	          <reportOutputDirectory>${project.build.directory}/api</reportOutputDirectory>
+	          <destDir>api</destDir>
+	          <charset>UTF-8</charset>
+	          <docencoding>UTF-8</docencoding>
+	          <breakiterator>true</breakiterator>
+	          <version>true</version>
+	          <author>true</author>
+	          <keywords>true</keywords>
+	          <overview>${basedir}/src/javadoc/overview.html</overview>
+	          <doctitle>${project.name} ${project.version} API Reference</doctitle>
+	          <windowtitle>${project.name} ${project.version} API Reference</windowtitle>
+	          <additionalparam>
+	            -link http://docs.oracle.com/javase/6/docs/api/
+
+				-group "Waarp Common Command Authentication Session and File package" "org.waarp.common.command*:org.waarp.common.file*:org.waarp.common.filemonitor*"
+				-group "Waarp Common Crypto package" "org.waarp.common.crypto*"
+				-group "Waarp Common Database package" "org.waarp.common.database*"
+				-group "Waarp Common CPU package" "org.waarp.common.cpu*"
+				-group "Waarp Common Utility package" "org.waarp.common.tar*:org.waarp.common.utility*:org.waarp.common.xml*:org.waarp.common.lru*:org.waarp.common.state*:org.waarp.common.role*:org.waarp.common.service*:org.waarp.common.transcode*"
+				-group "Waarp Common Logging and Future package" "org.waarp.common.exception*:org.waarp.common.future*:org.waarp.common.logging*"
+
+	            -sourceclasspath ${basedir}/target/classes
+	          </additionalparam>
+	          <encoding>UTF-8</encoding>
+	          <locale>en_US</locale>
+	          <excludePackageNames>${project.groupId}.test*:${project.groupId}.example*:${project.groupId}.util.internal*</excludePackageNames>
+          </configuration>
+          <reports>
+           <report>aggregate</report>
+          </reports>
+         </reportSet>
+        </reportSets>
+      </plugin>
+	</plugins>
+  </reporting>
+</project>
