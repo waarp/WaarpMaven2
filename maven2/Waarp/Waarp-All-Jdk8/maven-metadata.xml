@@ -3,12 +3,13 @@
   <groupId>Waarp</groupId>
   <artifactId>Waarp-All-Jdk8</artifactId>
   <versioning>
-    <latest>3.3.4</latest>
-    <release>3.3.4</release>
+    <latest>3.4.0</latest>
+    <release>3.4.0</release>
     <versions>
       <version>3.3.3</version>
       <version>3.3.4</version>
+      <version>3.4.0</version>
     </versions>
-    <lastUpdated>20200602164348</lastUpdated>
+    <lastUpdated>20200720114321</lastUpdated>
   </versioning>
 </metadata>
