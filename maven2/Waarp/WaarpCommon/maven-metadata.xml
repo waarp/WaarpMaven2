@@ -3,8 +3,8 @@
   <groupId>Waarp</groupId>
   <artifactId>WaarpCommon</artifactId>
   <versioning>
-    <latest>3.5.0</latest>
-    <release>3.5.0</release>
+    <latest>3.5.1-jre11</latest>
+    <release>3.5.1-jre11</release>
     <versions>
       <version>3.0.11</version>
       <version>3.1.0</version>
@@ -17,7 +17,10 @@
       <version>3.3.4</version>
       <version>3.4.0</version>
       <version>3.5.0</version>
+      <version>3.5.1</version>
+      <version>3.5.1-jre8</version>
+      <version>3.5.1-jre11</version>
     </versions>
-    <lastUpdated>20200904161757</lastUpdated>
+    <lastUpdated>20200929151314</lastUpdated>
   </versioning>
 </metadata>
